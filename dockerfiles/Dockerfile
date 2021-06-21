@@ -76,6 +76,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Define work directory
 WORKDIR /var/www/laravel-studos
+COPY ./ /var/www/laravel-studos
 RUN chown -R www-data:www-data /var/www
 
 # Expose ports
