@@ -1,0 +1,42 @@
+version: '3'
+services:
+  mysql:
+    image: mariadb:10.5
+    restart: unless-stopped
+    volumes:
+      - "./data/db:/var/lib/mysql"
+    ports:
+      - "9906:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=studos
+      - MYSQL_DATABASE=studos
+      - MYSQL_USER=studos
+      - MYSQL_PASSWORD=studos
+    networks:
+      - studos-ntw 
+  studos-service:
+    build: ./dockerfiles
+    depends_on:
+      - mysql
+    volumes:
+      - ".:/var/www/laravel-studos"
+      - "./dockerfiles/config/php/php-fpm.conf:/etc/php-fpm.conf"
+      - "./dockerfiles/config/php/www.conf:/etc/php-fpm.d/www.conf"
+      - "./dockerfiles/config/php/php.ini:/usr/local/etc/php/php.ini"
+    networks:
+      - studos-ntw 
+  nginx:
+    image: nginx:latest
+    depends_on:
+      - studos-service
+    volumes:
+      - ".:/var/www/laravel-studos"
+      - "./dockerfiles/config/nginx/default.conf:/etc/nginx/conf.d/default.conf"
+    ports:
+      - "8200:80"
+    restart: always
+    networks:
+      - studos-ntw 
+networks:
+  studos-ntw:
+    driver: bridge
