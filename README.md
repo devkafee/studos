@@ -1,4 +1,6 @@
-## Permissões
+## Instalação
+    git clone https://github.com/devkafee/studos.git
+    
 
 ## Sobre
     - Hashids
@@ -21,12 +23,3 @@
 
     - Resposta
         => Para o cadastramento da URL, como a requisição está como POST, não faz sentido retornar uma view uma vez que a requisição terá que ser Rest.
-
-
-{
-    "response": {
-        "url_long": "http://studos.com.br",
-        "url_short": "http://localhost:8000/0D4MvjOa",
-        "expire": "2021-06-28"
-    }
-}
