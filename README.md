@@ -1,6 +1,43 @@
 ## Instalação
     git clone https://github.com/devkafee/studos.git
-    
+    cd studos/
+    composer install
+    php artisan migrate
+    sudo chmod -R 755 storage/*
+    docker-compose up -d --build
+
+## Tests de Featured
+    php artisan test
+
+#### Resultado esperado:
+    PASS  Tests\Feature\ShortnerTest
+    ✓ add url success
+    ✓ add url error 404
+    ✓ get url success
+    ✓ get url error
+
+## Tecnologias
+    - PHP 7.4
+    - Laravel 8
+    - MariaDB 10.5
+
+## Coleção POSTMAN
+    https://documenter.getpostman.com/view/363344/TzeZFn6q
+
+## Dificuldades
+Encontrei alguns obstáculos em decorrência do meu ambiente de desenvolvimento estar formatado com os recursos e permissões específicas para o meu trabalho atual.Utilizo uma máquina com Linux Mint, com permissões e grupos de usuários bastante específicos.Para conseguir organizar as permissões de acesso do docker aos volumes (tanto da aplicação / quanto ao banco) e posteriormente o acesso da aplicação ao banco, eu acabei usando quase 80% do meu tempo disponível.
+
+## Configurações
+No repositório do projeto, eu estou enviando o arquivo .env para alteração de acordo com o seu ambiente.
+Segue abaixo os pontos onde recomendo modificar de acordo com as portas e URLs disponíveis.
+
+    - docker-compose.yml
+        - Linha 9: Portas do banco de dados, atual: 9906
+        - Linha 36: Portas da aplicação, atual: 8200
+
+    - .env
+        - Linha 5: Url da aplicação, atual: localhost:8200
+        - Linhas 11/12: Configurações do banco de dados de acordo com as informações do Docker.
 
 ## Sobre
     - Hashids
