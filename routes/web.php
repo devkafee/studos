@@ -13,3 +13,8 @@ use App\Http\Controllers\ShortnerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::group(['as' => 'shortner'], function(){
+	Route::post('/', [ShortnerController::class, 'add']);
+	Route::get('/{hash}', [ShortnerController::class, 'redirectToUrl']);
+});
